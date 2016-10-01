@@ -1,0 +1,16 @@
+{
+  "AWSEBDockerrunVersion": "1",
+  "Authentication": {
+    "Bucket": "melvins",
+    "Key": "project/docker-registry-auth.json"
+  },
+  "Image": {
+    "Name": "${docker.registry.namespace}/${docker.image.repo}:${docker.image.version}",
+    "Update": "true"
+  },
+  "Ports": [
+    {
+      "ContainerPort": "8080"
+    }
+  ]
+}

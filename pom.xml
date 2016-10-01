@@ -1,0 +1,62 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>me.melvins.labs</groupId>
+    <artifactId>elasticbeanstalk-parent</artifactId>
+    <version>1.0.0.${BUILD_NUMBER}</version>
+    <packaging>pom</packaging>
+
+    <name>ElasticBeanstalk App Builder</name>
+    <description>This is a Sample WebApp to demonstrate AWS SDK usage.</description>
+
+    <developers>
+        <developer>
+            <name>Mels</name>
+        </developer>
+    </developers>
+
+    <properties>
+        <!-- Project Specific Settings -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- WS Specific Settings -->
+        <service.groupId></service.groupId>
+        <service.artifactId></service.artifactId>
+        <service.version></service.version>
+
+        <!-- Docker Specific Settings -->
+        <docker.build.dir>${project.basedir}/docker-build</docker.build.dir>
+        <docker.registry.namespace></docker.registry.namespace>
+        <docker.image.repo>${service.artifactId}</docker.image.repo>
+        <docker.image.version>${service.version}</docker.image.version>
+    </properties>
+
+    <build>
+        <plugins>
+
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.6</version>
+				<configuration>
+				    <descriptors>
+					    <descriptor>src/main/assembly/aws-eb-app-assembly.xml</descriptor>
+					</descriptors>
+				</configuration>
+                <executions>
+                    <!-- Make AWS ElasticBeanstalk App Assembly -->
+                    <execution>
+                        <id>make-aws-eb-app-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+    </build>
+
+</project>
